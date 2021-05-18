@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #000000;
+  --white: #ffffff;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+dl {
+  margin: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+p, h1, h2, h3 {
+  margin: 0;
+}
+
+fieldset {
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  border: none;
+}
+
+body {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100%;
+  min-width: 320px;
+  font-family: 'Lab Grotesque', Arial, sans-serif;
+}
+
+:global {
+  .visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    font-size: 1px;
+  }
+}
+

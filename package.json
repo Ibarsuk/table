@@ -1,0 +1,30 @@
+{
+  "name": "table",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "@babel/core": "7.12",
+    "@babel/preset-env": "7.12",
+    "@babel/preset-react": "7.12",
+    "babel-loader": "8.2",
+    "css-loader": "^5.0",
+    "eslint": "7.18.0",
+    "eslint-plugin-react": "7.22",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "1.6.0",
+    "sass": "1.32.13",
+    "sass-loader": "^10",
+    "webpack": "4.46",
+    "webpack-cli": "3.3",
+    "webpack-dev-server": "3.11"
+  },
+  "dependencies": {
+    "react": "16.14",
+    "react-dom": "16.14",
+    "prop-types": "15.7"
+  }
+}

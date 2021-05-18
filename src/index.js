@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 
 import store from './store/store';
 
-import App from './components/app';
+import App from './components/app/app';
 
 import './scss/general.scss';
 

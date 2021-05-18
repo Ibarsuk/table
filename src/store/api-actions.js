@@ -5,5 +5,3 @@ export const fetchUsers = (tableType) => (dispatch, _state, passedApi) => {
   passedApi.get(ApiRoutes[tableType])
     .then(({data}) => dispatch((loadUsers(data))))
 }
-
-// export const fetchUsers = () => console.log(`yese`);

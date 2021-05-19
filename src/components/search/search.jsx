@@ -1,6 +1,8 @@
 import React, {memo, useState} from "react";
 import PropTypes from "prop-types";
 
+import style from './search.style.scss';
+
 const Search = ({onFilter}) => {
   const [textToSearch, setTextToSearch] = useState(``);
 
@@ -11,16 +13,17 @@ const Search = ({onFilter}) => {
   };
 
   return (
-    <div>
+    <div className={style.search}>
       <input
         type="text"
         name="search"
+        className={style.searchInput}
         placeholder="Find in table"
         onChange={(evt) => setTextToSearch(evt.target.value)}
         value={textToSearch}
       />
-      <button type="button" onClick={handleFindButtonClick}>Find</button>
-      <button type="button" onClick={handleResetButtonClick}>Reset</button>
+      <button type="button" onClick={handleFindButtonClick} className={`${style.searchButton} ${style.searchButtonAccent}`}>Find</button>
+      <button type="button" onClick={handleResetButtonClick} className={style.searchButton}>Reset</button>
     </div>
   );
 };

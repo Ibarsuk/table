@@ -8,6 +8,7 @@ import store from './store/store';
 import App from './components/app/app';
 
 import './scss/general.scss';
+import './scss/fonts.scss';
 
 ReactDOM.render(
   <Provider store={store}>

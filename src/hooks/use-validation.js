@@ -17,7 +17,7 @@ const checkValidity = (type, value) => {
       return emailRe.test(value) ? null : `Invalid email`;
 
     case ValidationType.PHONE:
-      return phoneRe.test(value) ? null : `invalid phone number`;
+      return phoneRe.test(value) ? null : `Invalid phone number`;
 
     default:
       return null;

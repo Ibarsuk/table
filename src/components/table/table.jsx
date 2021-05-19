@@ -15,6 +15,8 @@ import FullUserInfo from "../full-user-info/full-user-info";
 import AddUserForm from '../add-user-form/add-user-form';
 import Loading from "../loading/loading";
 
+import style from './table.style.scss';
+
 const initialSliceData = {
   start: 0,
   fin: MAX_TABLE_ROWS
@@ -104,48 +106,50 @@ const Table = () => {
   }
 
   return (
-    <section>
-      <AddUserForm/>
-      <Search onFilter={onFilter}/>
-      <table>
-        <thead>
-        <tr>
-           <th onClick={handleTableHeadersClick(SortType.ID)}>id</th>
-           <th onClick={handleTableHeadersClick(SortType.FIRST_NAME)}>firstName</th>
-           <th onClick={handleTableHeadersClick(SortType.LAST_NAME)}>LastName</th>
-           <th onClick={handleTableHeadersClick(SortType.EMAIL)}>email</th>
-           <th>phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            usersToRender.map((value, i) => <TableRow  {...value} key={`${i}-user ${value.id}`} onRowClick={setChosenUserId}/>)
-          }
-        </tbody>
-      </table>
-      {
-        users.length > MAX_TABLE_ROWS
-        &&
-        <>
-          <button
-            type="button"
-            onClick={handleAnotherPageButtonClick(SliceDataUpdate.PREV)}
-            disabled={isPreviousStepButtonDisabled}
-          >
-            Show previous
-          </button>
+    <div className={style.table}>
+      <div className={style.widthWrapper}>
+        <AddUserForm/>
+        <Search onFilter={onFilter}/>
+        <table>
+          <thead>
+          <tr>
+             <th onClick={handleTableHeadersClick(SortType.ID)}>id</th>
+            <th onClick={handleTableHeadersClick(SortType.FIRST_NAME)}>firstName</th>
+            <th onClick={handleTableHeadersClick(SortType.LAST_NAME)}>LastName</th>
+            <th onClick={handleTableHeadersClick(SortType.EMAIL)}>email</th>
+            <th>phone</th>
+            </tr>
+          </thead>
+          <tbody>
+           {
+              usersToRender.map((value, i) => <TableRow  {...value} key={`${i}-user ${value.id}`} onRowClick={setChosenUserId}/>)
+           }
+          </tbody>
+        </table>
+        {
+         users.length > MAX_TABLE_ROWS
+          &&
+          <>
+           <button
+             type="button"
+             onClick={handleAnotherPageButtonClick(SliceDataUpdate.PREV)}
+             disabled={isPreviousStepButtonDisabled}
+            >
+             Show previous
+            </button>
 
-          <button
-            type="button"
-            onClick={handleAnotherPageButtonClick(SliceDataUpdate.NEXT)}
-            disabled={isNextStepButtonDisabled}
-          >
-            Show next
-          </button>
-        </>
-      }
-      {chosenUserId && <FullUserInfo {...users.find((value) => value.id === chosenUserId)} onUserInfoClose={onUserInfoClose}/>}
-    </section>
+            <button
+              type="button"
+             onClick={handleAnotherPageButtonClick(SliceDataUpdate.NEXT)}
+             disabled={isNextStepButtonDisabled}
+            >
+              Show next
+            </button>
+          </>
+        }
+        {chosenUserId && <FullUserInfo {...users.find((value) => value.id === chosenUserId)} onUserInfoClose={onUserInfoClose}/>}
+      </div>
+    </div>
   );
 };
 

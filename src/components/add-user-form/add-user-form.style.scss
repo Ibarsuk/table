@@ -1,0 +1,100 @@
+@import '../../scss/mixins.scss';
+
+.bigButton {
+  font-size: 16px;
+  line-height: 24px;
+  display: block;
+  color: var(--white);
+  padding: 12px;
+  margin-top: auto;
+  width: 100%;
+  background: linear-gradient(255.35deg, var(--gradient-red-darker) 0.83%, rgba(255, 79, 79, 0) 108.93%), var(--gradient-red);
+  box-shadow: 0px 0px 24px var(--red-shadow);
+  border-radius: 6px;
+
+  &:hover {
+    background: var(--red);
+  }
+
+  &:disabled {
+    cursor: default;
+    background: var(--gray-light);
+    box-shadow: none;
+  }
+}
+
+.userAddButton {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.form {
+  position: fixed;
+  width: 550px;
+  top: 120px;
+  left: calc(50% - 275px);
+  min-height: 480px;
+  border-radius: 30px;
+  padding: 55px 16px 30px 16px;
+  background-color: var(--white);
+  box-shadow: 0 10px 30px var(--black-shadow);
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.openButton {
+  max-width: 200px;
+  margin-top: 30px;
+}
+
+.closeButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  & svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: inherit;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+
+  &:last-child  {
+    margin-bottom: 0;
+  }
+}
+
+.labelText {
+  margin-bottom: 5px;
+}
+
+.textInput {
+  @include text-input;
+}
+
+.error {
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--red);
+  margin-top: 3px;
+  margin-bottom: 10px;
+}

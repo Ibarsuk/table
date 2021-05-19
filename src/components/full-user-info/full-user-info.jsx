@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
 const FullUserInfo = ({
@@ -37,4 +37,4 @@ FullUserInfo.propTypes = {
   onUserInfoClose: PropTypes.func.isRequired
 };
 
-export default FullUserInfo;
+export default memo(FullUserInfo);

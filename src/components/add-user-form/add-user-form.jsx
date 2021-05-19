@@ -26,7 +26,7 @@ const AddUserForm = () => {
 
   const [opened, setIfOpened] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
-  const {errorMessages, isValid, validate} = useValidation(inputTypes);
+  const {errorMessages, validate} = useValidation(inputTypes);
 
   const handleFormChange = ({target: {name, value}}) =>
     setFormData((prevData) => ({
@@ -37,7 +37,7 @@ const AddUserForm = () => {
     const handleFormSubmit = (evt) => {
       evt.preventDefault();
 
-      validate(formData);
+      const isValid = validate(formData);
 
       if (!isValid) {return}
 
@@ -48,6 +48,8 @@ const AddUserForm = () => {
 
       setFormData(initialFormData);
     };
+
+    const isAddButtonDisabled = !(Object.values(formData).every((value) => value.length > 0))
 
   return (
     <div>
@@ -64,8 +66,9 @@ const AddUserForm = () => {
           {errorMessages.email}
           <input type="tel" name="phone" placeholder="Phone number" value={formData.phone}/>
           {errorMessages.phone}
-          <button type="submit">Add to table</button>
-        </form> :
+          <button type="submit" disabled={isAddButtonDisabled}>Add to table</button>
+        </form>
+        :
         <button type="button" onClick={() => setIfOpened(true)}>Add user</button>
       }
     </div>

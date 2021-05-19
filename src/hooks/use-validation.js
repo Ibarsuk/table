@@ -48,11 +48,14 @@ const useValidation = (inputTypes) => {
 
   const [errorMessages, setErrorMessages] = useState(createInputMessages());
 
-  const validate = (inputValues) => setErrorMessages(createInputMessages(inputValues));
+  const validate = (inputValues) => {
+    const newMessages = createInputMessages(inputValues);
+    setErrorMessages(newMessages);
+    return Object.values(newMessages).every((message) => message === null);
+  };
 
   return {
     validate,
-    isValid: Object.values(errorMessages).every((message) => message === null),
     errorMessages
   };
 };

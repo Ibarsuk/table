@@ -2,16 +2,18 @@ import React, {useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {fetchUsers} from "../../store/api-actions";
-import {MAX_TABLE_ROWS, SortType} from '../../const';
+import {MAX_TABLE_ROWS, SortType, TableType} from '../../const';
 import {SortUsers, filterUsers} from '../../util';
+import {changeTableType} from "../../store/action-creators";
 
-import {getIfUsersLoaded, getUsers} from "../../store/reducers/data/selectors";
+import {getIfUsersLoaded, getUsers, getUsersFetchErrorStatus} from "../../store/reducers/data/selectors";
 import {getTableType} from "../../store/reducers/work-process/selectors";
 
 import TableRow from '../table-row/table-row';
 import Search from "../search/search";
 import FullUserInfo from "../full-user-info/full-user-info";
 import AddUserForm from '../add-user-form/add-user-form';
+import Loading from "../loading/loading";
 
 const initialSliceData = {
   start: 0,
@@ -40,6 +42,7 @@ const Table = () => {
   const tableType = useSelector(getTableType);
   const usersLoaded = useSelector(getIfUsersLoaded);
   const users = useSelector(getUsers);
+  const ifUsersFetchFailed = useSelector(getUsersFetchErrorStatus);
 
   const [chosenUserId, setChosenUserId] = useState(null);
   const [searchLine, setSearchLine] = useState(null);
@@ -51,8 +54,6 @@ const Table = () => {
     searchLine ? filterUsers(users, searchLine) : users,
     [searchLine, users]
   );
-
-  console.log(filteredUsers);
 
   const usersToRender = useMemo(() => {
     const sortedUsers = SortUsers[sort](filteredUsers)
@@ -77,6 +78,8 @@ const Table = () => {
 
   const handleAnotherPageButtonClick = (SliceDataUpdate) => () => setSliceData(SliceDataUpdate);
 
+  const handleCloseTableButtonClick = () => dispatch(changeTableType(TableType.NONE))
+
   const onFilter = (searchLine) => {
     setSliceData(initialSliceData);
     setSearchLine(searchLine);
@@ -87,8 +90,17 @@ const Table = () => {
   const isNextStepButtonDisabled = sliceData.fin >= filteredUsers.length;
   const isPreviousStepButtonDisabled = sliceData.start - MAX_TABLE_ROWS < 0;
 
+  if (ifUsersFetchFailed) {
+    return (
+      <div>
+        <h2>Havent managed to load users</h2>
+        <button type="button" onClick={handleCloseTableButtonClick}>Close</button>
+      </div>
+    );
+  }
+
   if (!usersLoaded) {
-    return <h2>LOADING</h2>;
+    return <Loading/>;
   }
 
   return (

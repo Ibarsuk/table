@@ -5,3 +5,5 @@ const currentReducerName = reducerNameSpace.DATA;
 export const getUsers = (state) => state[currentReducerName].users.data;
 
 export const getIfUsersLoaded = (state) => state[currentReducerName].users.loaded;
+
+export const getUsersFetchErrorStatus = (state) => state[currentReducerName].users.error;

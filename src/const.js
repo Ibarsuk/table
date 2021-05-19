@@ -24,4 +24,15 @@ export const SortType = {
   EMAIL: `EMAIL`
 };
 
+export const ValidationType = {
+  NUMBER: `NUMBER`,
+  STRING: `STRING`,
+  EMAIL: `EMAIL`,
+  PHONE: `PHONE`
+};
+
+export const emailRe = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
+export const phoneRe = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
 export const MAX_TABLE_ROWS = 50;

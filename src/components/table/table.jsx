@@ -47,17 +47,20 @@ const Table = () => {
   const [sortInfo, setSort] = useState(initialSortData);
   const {sort, isSortReversed} = sortInfo;
 
+  const filteredUsers = useMemo(() =>
+    searchLine ? filterUsers(users, searchLine) : users,
+    [searchLine, users]
+  );
+
+  console.log(filteredUsers);
+
   const usersToRender = useMemo(() => {
-    const filteredUsers = searchLine ? filterUsers(users, searchLine) : users;
     const sortedUsers = SortUsers[sort](filteredUsers)
     const usersPreparedForSlice = isSortReversed ? sortedUsers.reverse() : sortedUsers;
     return usersPreparedForSlice.slice(sliceData.start, sliceData.fin);
   },
-    [users, sort, sliceData, isSortReversed, searchLine]
+    [sort, sliceData, isSortReversed, filteredUsers]
   );
-
-  const isNextStepButtonDisabled = sliceData.fin + MAX_TABLE_ROWS > users.length;
-  const isPreviousStepButtonDisabled = sliceData.start - MAX_TABLE_ROWS < 0;
 
   useEffect(() => {
     dispatch(fetchUsers(tableType))
@@ -80,6 +83,9 @@ const Table = () => {
   };
 
   const onUserInfoClose = () => setChosenUserId(null);
+
+  const isNextStepButtonDisabled = sliceData.fin >= filteredUsers.length;
+  const isPreviousStepButtonDisabled = sliceData.start - MAX_TABLE_ROWS < 0;
 
   if (!usersLoaded) {
     return <h2>LOADING</h2>;

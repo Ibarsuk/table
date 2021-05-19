@@ -35,7 +35,7 @@ const useValidation = (inputTypes) => {
     return defaultValues;
   };
 
-  const createInputMessages = (values) => {
+  const createErrorMessages = (values) => {
     const preparedValues = values ? values : getDefaultValues();
     const messages = {};
 
@@ -46,12 +46,13 @@ const useValidation = (inputTypes) => {
     return messages;
   };
 
-  const [errorMessages, setErrorMessages] = useState(createInputMessages());
+  const [errorMessages, setErrorMessages] = useState(createErrorMessages());
 
   const validate = (inputValues) => {
-    const newMessages = createInputMessages(inputValues);
+    const newMessages = createErrorMessages(inputValues);
+    const isValid = Object.values(newMessages).every((message) => message === null);
     setErrorMessages(newMessages);
-    return Object.values(newMessages).every((message) => message === null);
+    return isValid;
   };
 
   return {

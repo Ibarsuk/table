@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import PropTypes from "prop-types";
 
 const TableRow = ({
@@ -6,10 +6,14 @@ const TableRow = ({
   firstName,
   lastName,
   email,
-  phone
+  phone,
+  onRowClick
 }) => {
+
+  const handleRowClick = () => onRowClick(id);
+
   return (
-    <tr>
+    <tr onClick={handleRowClick}>
       <td>{id}</td>
       <td>{firstName}</td>
       <td>{lastName}</td>
@@ -25,6 +29,7 @@ TableRow.propTypes = {
   lastName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
+  onRowClick: PropTypes.func.isRequired
 };
 
-export default TableRow;
+export default memo(TableRow);

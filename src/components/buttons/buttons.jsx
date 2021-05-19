@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-import { TableType } from "../../const";
-import { changeTableType } from "../../store/action-creators";
+import {TableType} from "../../const";
+import {changeTableType} from "../../store/action-creators";
 
 const Buttons = () => {
   const dispatch = useDispatch();
@@ -9,10 +9,10 @@ const Buttons = () => {
   const handleButtonClick = (tableType) => () => dispatch(changeTableType(tableType))
 
   return (
-    <section>
+    <div>
       <button type="button" onClick={handleButtonClick(TableType.SMALL)}>Table</button>
       <button type="button" onClick={handleButtonClick(TableType.BIG)}>Long Table</button>
-    </section>
+    </div>
   );
 };
 

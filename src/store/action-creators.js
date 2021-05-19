@@ -12,4 +12,3 @@ export const loadUsers = createAction(ActionType.LOAD_USERS, (payload) => ({
 export const addUser = createAction(ActionType.ADD_USER, (payload) => ({
   payload
 }));
-

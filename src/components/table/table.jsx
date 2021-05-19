@@ -3,11 +3,15 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {fetchUsers} from "../../store/api-actions";
 import {MAX_TABLE_ROWS, SortType} from '../../const';
+import {SortUsers, filterUsers} from '../../util';
 
 import {getIfUsersLoaded, getUsers} from "../../store/reducers/data/selectors";
 import {getTableType} from "../../store/reducers/work-process/selectors";
 
 import TableRow from '../table-row/table-row';
+import Search from "../search/search";
+import FullUserInfo from "../full-user-info/full-user-info";
+import AddUserForm from '../add-user-form/add-user-form';
 
 const initialSliceData = {
   start: 0,
@@ -30,14 +34,6 @@ const SliceDataUpdate = {
   })
 };
 
-const Sort = {
-  [SortType.NONE]: (users) => users,
-  [SortType.ID]: (users) => users.slice().sort((prev, curr) => prev.id - curr.id),
-  [SortType.FIRST_NAME]: (users) => users.slice().sort((prev, curr) => prev.firstName.localeCompare(curr.firstName)),
-  [SortType.LAST_NAME]: (users) => users.slice().sort((prev, curr) => prev.lastName.localeCompare(curr.lastName)),
-  [SortType.EMAIL]: (users) => users.slice().sort((prev, curr) => prev.email.localeCompare(curr.email))
-};
-
 const Table = () => {
   const dispatch = useDispatch();
 
@@ -45,16 +41,19 @@ const Table = () => {
   const usersLoaded = useSelector(getIfUsersLoaded);
   const users = useSelector(getUsers);
 
+  const [chosenUserId, setChosenUserId] = useState(null);
+  const [searchLine, setSearchLine] = useState(null);
   const [sliceData, setSliceData] = useState(initialSliceData);
   const [sortInfo, setSort] = useState(initialSortData);
   const {sort, isSortReversed} = sortInfo;
 
   const usersToRender = useMemo(() => {
-    const sortedUsers = Sort[sort](users)
+    const filteredUsers = searchLine ? filterUsers(users, searchLine) : users;
+    const sortedUsers = SortUsers[sort](filteredUsers)
     const usersPreparedForSlice = isSortReversed ? sortedUsers.reverse() : sortedUsers;
     return usersPreparedForSlice.slice(sliceData.start, sliceData.fin);
   },
-    [users, sort, sliceData, isSortReversed]
+    [users, sort, sliceData, isSortReversed, searchLine]
   );
 
   const isNextStepButtonDisabled = sliceData.fin + MAX_TABLE_ROWS > users.length;
@@ -75,23 +74,34 @@ const Table = () => {
 
   const handleAnotherPageButtonClick = (SliceDataUpdate) => () => setSliceData(SliceDataUpdate);
 
+  const onFilter = (searchLine) => {
+    setSliceData(initialSliceData);
+    setSearchLine(searchLine);
+  };
+
+  const onUserInfoClose = () => setChosenUserId(null);
+
   if (!usersLoaded) {
     return <h2>LOADING</h2>;
   }
 
   return (
     <section>
+      <AddUserForm/>
+      <Search onFilter={onFilter}/>
       <table>
-        <tbody>
-          <tr>
+        <thead>
+        <tr>
            <th onClick={handleTableHeadersClick(SortType.ID)}>id</th>
            <th onClick={handleTableHeadersClick(SortType.FIRST_NAME)}>firstName</th>
            <th onClick={handleTableHeadersClick(SortType.LAST_NAME)}>LastName</th>
            <th onClick={handleTableHeadersClick(SortType.EMAIL)}>email</th>
            <th>phone</th>
           </tr>
+        </thead>
+        <tbody>
           {
-            usersToRender.map((value, i) => <TableRow  {...value} key={`${i}-user ${value.id}`}/>)
+            usersToRender.map((value, i) => <TableRow  {...value} key={`${i}-user ${value.id}`} onRowClick={setChosenUserId}/>)
           }
         </tbody>
       </table>
@@ -116,6 +126,7 @@ const Table = () => {
           </button>
         </>
       }
+      {chosenUserId && <FullUserInfo {...users.find((value) => value.id === chosenUserId)} onUserInfoClose={onUserInfoClose}/>}
     </section>
   );
 };

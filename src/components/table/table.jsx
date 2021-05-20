@@ -14,6 +14,7 @@ import Search from "../search/search";
 import FullUserInfo from "../full-user-info/full-user-info";
 import AddUserForm from '../add-user-form/add-user-form';
 import Loading from "../loading/loading";
+import TableError from "./table-error";
 
 import style from './table.scss';
 
@@ -93,12 +94,7 @@ const Table = () => {
   const isPreviousStepButtonDisabled = sliceData.start - MAX_TABLE_ROWS < 0;
 
   if (ifUsersFetchFailed) {
-    return (
-      <div>
-        <h2>Havent managed to load users</h2>
-        <button type="button" onClick={handleCloseTableButtonClick}>Close</button>
-      </div>
-    );
+    return <TableError onCloseButtonClick={handleCloseTableButtonClick}/>;
   }
 
   if (!usersLoaded) {
@@ -106,18 +102,18 @@ const Table = () => {
   }
 
   return (
-    <div className={style.table}>
+    <div className={style.container}>
       <div className={style.widthWrapper}>
         <AddUserForm/>
         <Search onFilter={onFilter}/>
-        <table>
+        <table className={style.table}>
           <thead>
           <tr>
-             <th onClick={handleTableHeadersClick(SortType.ID)}>id</th>
-            <th onClick={handleTableHeadersClick(SortType.FIRST_NAME)}>firstName</th>
+            <th onClick={handleTableHeadersClick(SortType.ID)}>id</th>
+            <th onClick={handleTableHeadersClick(SortType.FIRST_NAME)}>FirstName</th>
             <th onClick={handleTableHeadersClick(SortType.LAST_NAME)}>LastName</th>
-            <th onClick={handleTableHeadersClick(SortType.EMAIL)}>email</th>
-            <th>phone</th>
+            <th onClick={handleTableHeadersClick(SortType.EMAIL)}>Email</th>
+            <th>Phone</th>
             </tr>
           </thead>
           <tbody>
@@ -129,23 +125,25 @@ const Table = () => {
         {
          users.length > MAX_TABLE_ROWS
           &&
-          <>
+          <div className={style.navButtons}>
            <button
              type="button"
+             className={style.navButton}
              onClick={handleAnotherPageButtonClick(SliceDataUpdate.PREV)}
              disabled={isPreviousStepButtonDisabled}
             >
-             Show previous
+             &lt;-- Show previous
             </button>
 
             <button
               type="button"
-             onClick={handleAnotherPageButtonClick(SliceDataUpdate.NEXT)}
-             disabled={isNextStepButtonDisabled}
+              className={style.navButton}
+              onClick={handleAnotherPageButtonClick(SliceDataUpdate.NEXT)}
+              disabled={isNextStepButtonDisabled}
             >
-              Show next
+              Show next --&gt;
             </button>
-          </>
+          </div>
         }
         {chosenUserId && <FullUserInfo {...users.find((value) => value.id === chosenUserId)} onUserInfoClose={onUserInfoClose}/>}
       </div>

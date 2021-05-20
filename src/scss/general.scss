@@ -13,6 +13,7 @@
   --border: #DFE3E6;
   --gray: #808080;
   --gray-light: #BEC5CC;
+  --background: #f6f6f6;
 }
 
 ul, ol {
@@ -60,6 +61,7 @@ body {
   min-height: 100%;
   min-width: 320px;
   font-family: 'Lab Grotesque', Arial, sans-serif;
+  background-color: var(--background);
 }
 
 :global {

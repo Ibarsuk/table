@@ -1,0 +1,31 @@
+@import '../../scss/mixins.scss';
+
+.container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: var(--white);
+  padding: 20px;
+  border-top-right-radius: 25px;
+  max-width: 550px;
+  min-width: 350px;
+}
+
+.info {
+  margin-bottom: 8px;
+}
+
+.descriptionText {
+  margin-top: 5px;
+  padding-left: 10px;
+}
+
+.closeButton {
+  @include gradient-button;
+
+  font-size: 14px;
+  width: 90px;
+  padding: 5px;
+  margin-left: auto;
+  box-shadow: none;
+}

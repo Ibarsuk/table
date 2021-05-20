@@ -20,8 +20,8 @@ const dataReducer = createReducer(initialState, (builder) => {
     state.users.data.unshift(action.payload);
   });
 
-  builder.addCase(ActionType.SET_USERS_FETCH_FAIL, (state) => {
-    state.users.error = true;
+  builder.addCase(ActionType.SET_USERS_FETCH_STATUS, (state, action) => {
+    state.users.error = action.payload;
   })
 });
 

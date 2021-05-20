@@ -13,4 +13,6 @@ export const addUser = createAction(ActionType.ADD_USER, (payload) => ({
   payload
 }));
 
-export const setUsersFetchFail = createAction(ActionType.SET_USERS_FETCH_FAIL);
+export const setUsersFetchStatus = createAction(ActionType.SET_USERS_FETCH_STATUS, (payload) => ({
+  payload
+}));

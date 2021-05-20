@@ -3,24 +3,10 @@
 .bigButton {
   font-size: 16px;
   line-height: 24px;
-  display: block;
-  color: var(--white);
   padding: 12px;
-  margin-top: auto;
   width: 100%;
-  background: linear-gradient(255.35deg, var(--gradient-red-darker) 0.83%, rgba(255, 79, 79, 0) 108.93%), var(--gradient-red);
-  box-shadow: 0px 0px 24px var(--red-shadow);
-  border-radius: 6px;
 
-  &:hover {
-    background: var(--red);
-  }
-
-  &:disabled {
-    cursor: default;
-    background: var(--gray-light);
-    box-shadow: none;
-  }
+  @include gradient-button;
 }
 
 .userAddButton {
@@ -29,10 +15,13 @@
 }
 
 .form {
-  position: fixed;
-  width: 550px;
-  top: 120px;
-  left: calc(50% - 275px);
+  // position: fixed;
+  position: relative;
+  // width: 550px;
+  width: 100%;
+  // top: 120px;
+  margin-top: 50px;
+  // left: calc(50% - 275px);
   min-height: 480px;
   border-radius: 30px;
   padding: 55px 16px 30px 16px;

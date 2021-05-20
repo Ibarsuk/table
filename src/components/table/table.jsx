@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {fetchUsers} from "../../store/api-actions";
 import {MAX_TABLE_ROWS, SortType, TableType} from '../../const';
-import {SortUsers, filterUsers} from '../../util';
+import {SortUsers, filterUsers} from '../../utils/util';
 import {changeTableType} from "../../store/action-creators";
 
 import {getIfUsersLoaded, getUsers, getUsersFetchErrorStatus} from "../../store/reducers/data/selectors";
@@ -93,6 +93,15 @@ const Table = () => {
   const isNextStepButtonDisabled = sliceData.fin >= filteredUsers.length;
   const isPreviousStepButtonDisabled = sliceData.start - MAX_TABLE_ROWS < 0;
 
+  const getSortIcon = (sortType) => {
+    if (sort === sortType) {
+      if (isSortReversed) {
+        return `▲`;
+      }
+      return `▼`;
+    }
+  };
+
   if (ifUsersFetchFailed) {
     return <TableError onCloseButtonClick={handleCloseTableButtonClick}/>;
   }
@@ -109,10 +118,10 @@ const Table = () => {
         <table className={style.table}>
           <thead>
           <tr>
-            <th onClick={handleTableHeadersClick(SortType.ID)}>id</th>
-            <th onClick={handleTableHeadersClick(SortType.FIRST_NAME)}>FirstName</th>
-            <th onClick={handleTableHeadersClick(SortType.LAST_NAME)}>LastName</th>
-            <th onClick={handleTableHeadersClick(SortType.EMAIL)}>Email</th>
+            <th onClick={handleTableHeadersClick(SortType.ID)}>id{getSortIcon(SortType.ID)}</th>
+            <th onClick={handleTableHeadersClick(SortType.FIRST_NAME)}>FirstName{getSortIcon(SortType.FIRST_NAME)}</th>
+            <th onClick={handleTableHeadersClick(SortType.LAST_NAME)}>LastName{getSortIcon(SortType.LAST_NAME)}</th>
+            <th onClick={handleTableHeadersClick(SortType.EMAIL)}>Email{getSortIcon(SortType.EMAIL)}</th>
             <th>Phone</th>
             </tr>
           </thead>

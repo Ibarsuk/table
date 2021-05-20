@@ -21,6 +21,7 @@ const Search = ({onFilter}) => {
         placeholder="Find in table"
         onChange={(evt) => setTextToSearch(evt.target.value)}
         value={textToSearch}
+        id="search-input"
       />
       <button type="button" onClick={handleFindButtonClick} className={`${style.searchButton} ${style.searchButtonAccent}`}>Find</button>
       <button type="button" onClick={handleResetButtonClick} className={style.searchButton}>Reset</button>

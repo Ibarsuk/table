@@ -13,7 +13,6 @@ const FullUserInfo = ({
 
   return (
     <div className={style.container}>
-
       <button type="button" className={style.closeButton} onClick={onUserInfoClose}>Close info</button>
       <p className={style.info}>Выбран пользователь <b>{firstName} {lastName}</b></p>
       <div className={style.info}>

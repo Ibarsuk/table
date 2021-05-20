@@ -1,4 +1,4 @@
-import {SortType, userFields} from './const';
+import {SortType, userFields} from '../const';
 
 export const SortUsers = {
   [SortType.NONE]: (users) => users,

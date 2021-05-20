@@ -4,8 +4,8 @@
   font-style: normal;
   font-weight: 400;
   src: local('Lab Grotesque'),
-       url('../public/fonts/LabGrotesque/LabGrotesque-Regular.woff2') format('woff2'),
-       url('../public/fonts/LabGrotesque/LabGrotesque-Regular.woff') format('woff');
+       url('fonts/LabGrotesque/LabGrotesque-Regular.woff2') format('woff2'),
+       url('fonts/LabGrotesque/LabGrotesque-Regular.woff') format('woff');
 }
 @font-face {
   font-family: 'Lab Grotesque';
@@ -13,6 +13,6 @@
   font-style: normal;
   font-weight: 500;
   src: local('Lab Grotesque'),
-       url('../public/fonts/LabGrotesque/LabGrotesque-Medium.woff2') format('woff2'),
-       url('../public/fonts/LabGrotesque/LabGrotesque-Medium.woff') format('woff');
+       url('fonts/LabGrotesque/LabGrotesque-Medium.woff2') format('woff2'),
+       url('fonts/LabGrotesque/LabGrotesque-Medium.woff') format('woff');
 }

@@ -15,7 +15,7 @@ import FullUserInfo from "../full-user-info/full-user-info";
 import AddUserForm from '../add-user-form/add-user-form';
 import Loading from "../loading/loading";
 
-import style from './table.style.scss';
+import style from './table.scss';
 
 const initialSliceData = {
   start: 0,

@@ -1,7 +1,7 @@
 import React, {memo, useState} from "react";
 import PropTypes from "prop-types";
 
-import style from './search.style.scss';
+import style from './search.scss';
 
 const Search = ({onFilter}) => {
   const [textToSearch, setTextToSearch] = useState(``);

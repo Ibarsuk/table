@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {TableType} from "../../const";
 import {changeTableType} from "../../store/action-creators";
 
-import style from './buttons.style.scss';
+import style from './buttons.scss';
 
 const Buttons = () => {
   const dispatch = useDispatch();

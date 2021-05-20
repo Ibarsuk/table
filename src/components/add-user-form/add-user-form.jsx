@@ -5,7 +5,7 @@ import {addUser} from "../../store/action-creators";
 import useValidation from '../../hooks/use-validation';
 import {ValidationType} from "../../const";
 
-import style from './add-user-form.style.scss';
+import style from './add-user-form.scss';
 
 const initialFormData = {
   id: ``,
